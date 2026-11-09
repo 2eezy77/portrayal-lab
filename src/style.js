@@ -2,15 +2,15 @@ export const style = {
     rules: [
         {
             filter: { kind: 'building' },
-            symbolizer: { type: 'polygon', fill: '#e64553', extrude: true },
+            symbolizer: { type: 'polygon', fill: 'rgb(69, 133, 230)', extrude: true },
         },
         {
             filter: { kind: 'road' },
-            symbolizer: { type: 'line', stroke: '#555555', width: 4 },
+            symbolizer: { type: 'line', stroke: 'rgb(236, 15, 136)', width: 5 },
         },
         {
             filter: { kind: 'poi' },
-            symbolizer: { type: 'point', fill: '#1e66f5', size: 10 },
+            symbolizer: { type: 'point', fill: 'rgb(66, 245, 30)', size: 5 },
         },
     ],
 };
