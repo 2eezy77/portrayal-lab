@@ -12,6 +12,10 @@ const map = new maplibregl.Map({
 
 map.on('load', () => {
     map.addSource('lab', { type: 'geojson', data: features });
+    // use JavaScript's **`.find()`** method
+    // It searches an array and returns the first item that passes a test,
+    //  instead of choosing an item by position
+    const buildingRule = style.rules.find((rule) => rule.filter.kind === 'building');
     map.addLayer({
         id: 'lab-building',
         type: 'fill',
