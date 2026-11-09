@@ -16,13 +16,15 @@ map.on('load', () => {
     // It searches an array and returns the first item that passes a test,
     //  instead of choosing an item by position
     const buildingRule = style.rules.find((rule) => rule.filter.kind === 'building');
+    const roadRule = style.rules.find((rule) => rule.filter.kind === 'road');
+    const poiRule = style.rules.find((rule) => rule.filter.kind === 'poi');
     map.addLayer({
         id: 'lab-building',
         type: 'fill',
         source: 'lab',
         filter: ['==', ['get', 'kind'], 'building'],
         //replacing hardcoded info with style.rules[array#].symbolizer.fill, with this expression allows you to call ./style.js (DONT USE QUOTES)
-        paint: { 'fill-color': style.rules[0].symbolizer.fill },
+        paint: { 'fill-color': buildingRule.symbolizer.fill },
     });
     map.addLayer({
         id: 'lab-road',
@@ -30,8 +32,8 @@ map.on('load', () => {
         source: 'lab',
         filter: ['==', ['get', 'kind'], 'road'],
         paint: {
-            'line-color': style.rules[1].symbolizer.stroke,
-            'line-width': style.rules[1].symbolizer.width,
+            'line-color': roadRule.symbolizer.stroke,
+            'line-width': roadRule.symbolizer.width,
         },
     });
     map.addLayer({
@@ -40,8 +42,8 @@ map.on('load', () => {
         source: 'lab',
         filter: ['==', ['get', 'kind'], 'poi'],
         paint: {
-            'circle-color': style.rules[2].symbolizer.fill,
-            'circle-radius': style.rules[2].symbolizer.size,
+            'circle-color': poiRule.symbolizer.fill,
+            'circle-radius': poiRule.symbolizer.size,
         },
     });
 });
