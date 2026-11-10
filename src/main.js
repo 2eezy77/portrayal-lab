@@ -1,5 +1,5 @@
 import { features } from './data.js';
-import { style } from './style.js';
+import { style, fallback } from './style.js';
 
 import * as maplibregl from 'maplibre-gl';
 
@@ -15,9 +15,9 @@ map.on('load', () => {
     // use JavaScript's **`.find()`** method
     // It searches an array and returns the first item that passes a test,
     //  instead of choosing an item by position
-    const buildingRule = style.rules.find((rule) => rule.filter.kind === 'building');
-    const roadRule = style.rules.find((rule) => rule.filter.kind === 'road');
-    const poiRule = style.rules.find((rule) => rule.filter.kind === 'poi');
+    const buildingRule = style.rules.find((rule) => rule.filter.kind === 'building') ?? fallback;
+    const roadRule = style.rules.find((rule) => rule.filter.kind === 'road') ?? fallback;
+    const poiRule = style.rules.find((rule) => rule.filter.kind === 'poi') ?? fallback;
     map.addLayer({
         id: 'lab-building',
         type: 'fill',
@@ -32,8 +32,9 @@ map.on('load', () => {
         source: 'lab',
         filter: ['==', ['get', 'kind'], 'road'],
         paint: {
-            'line-color': roadRule.symbolizer.stroke,
-            'line-width': roadRule.symbolizer.width,
+            // ?? means "if left side is nothing use right"
+            'line-color': (roadRule.symbolizer ?? roadRule).stroke,
+            'line-width': (roadRule.symbolizer ?? roadRule).width,
         },
     });
     map.addLayer({
