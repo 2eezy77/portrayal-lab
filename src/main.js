@@ -15,8 +15,8 @@ map.on('load', () => {
     // use JavaScript's **`.find()`** method
     // It searches an array and returns the first item that passes a test,
     //  instead of choosing an item by position
-    const buildingRule = style.rules.find((rule) => rule.filter.kind === 'building') ?? fallback;
-    const roadRule = style.rules.find((rule) => rule.filter.kind === 'road') ?? fallback;
+    const buildingRule = style.rules.find((rule) => rule.filter.kind === 'building') ?? fallback; // ?? if not left then do the right side (fallback)
+    const roadRule = style.rules.find((rule) => rule.filter.kind === 'road') ?? fallback; // fallback is explained in ./style.js
     const poiRule = style.rules.find((rule) => rule.filter.kind === 'poi') ?? fallback;
     map.addLayer({
         id: 'lab-building',
@@ -24,7 +24,7 @@ map.on('load', () => {
         source: 'lab',
         filter: ['==', ['get', 'kind'], 'building'],
         //replacing hardcoded info with style.rules[array#].symbolizer.fill, with this expression allows you to call ./style.js (DONT USE QUOTES)
-        paint: { 'fill-color': buildingRule.symbolizer.fill },
+        paint: { 'fill-color': (buildingRule.symbolizer ?? buildingRule).fill },
     });
     map.addLayer({
         id: 'lab-road',
@@ -43,8 +43,8 @@ map.on('load', () => {
         source: 'lab',
         filter: ['==', ['get', 'kind'], 'poi'],
         paint: {
-            'circle-color': poiRule.symbolizer.fill,
-            'circle-radius': poiRule.symbolizer.size,
+            'circle-color': (poiRule.symbolizer ?? poiRule).fill,
+            'circle-radius': (poiRule.symbolizer ?? poiRule).size,
         },
     });
 });

@@ -1,4 +1,4 @@
-export const fallback = { fill: '#999999', stroke: '#999999', width: 2, size: 6 };
+export const fallback = { fill:'rgb(153, 153, 153)', stroke:'rgb(153, 153, 153)', width: 2, size: 6 };
 export const style = {
     rules: [
         {
