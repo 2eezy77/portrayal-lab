@@ -3,6 +3,14 @@
     <head>
         <link rel="stylesheet" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" />
         <style>
+            #constrls {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                z-index: 1;
+                background: white;
+                padding: 6px;
+            }
             body {
                 margin: 0;
             }
@@ -13,6 +21,30 @@
         </style>
     </head>
     <body>
+        <!-- adding letter code semantics to the world currently hardcoded (static, to change the symbol, we swap one letter and redraw it):
+                * Slot 1 - Affiliation e.g., F = friend, H = Hostile
+                * Slot 11 - Unit size e.g., D = platoon.  -->
+        <div id="controls">
+            <!-- adding button to place copy of symbol anywhere you want-->
+            <button id="place-btn">Place</button>
+            <!--adding an input element so that users can search a location and it flies them there using photons api-->
+            <input id="place" placeholder="Kyiv, Paris..." />
+            <button id="go">Go</button>
+            <!-- adding an input element so that users can search instead for symbols and display them-->
+            <input id="words" placeholder="hostile armor company" />
+            <select id="aff">
+                <option value="F">Friend</option>
+                <option value="H">Hostile</option>
+                <option value="N">Neutral</option>
+                <option value="U">Unknown</option>
+            </select>
+            <select id="ech">
+                <option value="B">Squad</option>
+                <option value="D">Platoon</option>
+                <option value="E">Company</option>
+                <option value="F">Battalion</option>
+            </select>
+        </div>
         <div id="map2d"></div>
         <script type="module" src="/src/main.js"></script>
     </body>
