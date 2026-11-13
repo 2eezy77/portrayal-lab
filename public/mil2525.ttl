@@ -1,0 +1,25 @@
+@prefix mil: <https://cartoweave.dev/mil2525#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+#Each block is one thing plus its facts. `a` means "is a", and `;` means "same thing, one more fact".
+mil:Friend a mil:Affiliation;
+    rdfs:label "friend";
+    mil:code "F".
+mil:Hostile a mil:Affiliation;
+    rdfs:label "hostile";
+    mil:code "H".
+mil:Platoon a mil:Echelon;
+    rdfs:label "platoon";
+    mil:code "D".
+mil:Company a mil:Echelon;
+    rdfs:label "company";
+    mil:code "E".
+mil:Infantry a mil:UnitType;
+    rdfs:label "infantry";
+    mil:code "UCI---".
+mil:Engineer a mil:UnitType;
+    rdfs:label "engineer";
+    mil:code "UCE---".
+mil:Battalion a mil:Echelon;
+    rdfs:label "battalion";
+    mil:code "F".
